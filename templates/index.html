@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% set active_page = "index" %}
+
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+<h1>Accueil</h1>
+<p>Bienvenue sur le site de relevés de luminosité et température du Mont-Blanc</p>
+<p>Sélectionnez un capteur dans la liste pour afficher les données</p>
+
+{%if capteurs%}
+<div>
+    {% for capteur in capteurs%}
+    <p>{{capteur.name}} <a href="{{url_for('page_capteur', idcapteur=capteur.id)}}">Données brutes</a> - <a href="{{url_for('page_graphique', idcapteur=capteur.id)}}">Graphique</a></p>
+    {%endfor%}
+{%endif%}
+</div>
+{% endblock %}

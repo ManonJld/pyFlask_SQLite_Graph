@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% set active_page = "capteur" %}
+
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+
+<h1>Capteur </h1>
+
+<p>Veuillez sélectionner un capteur en <a href="{{url_for('page_index')}}">page d'accueil</a> afin d'afficher les données</p>
+
+{% endblock %}

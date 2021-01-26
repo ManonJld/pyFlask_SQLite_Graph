@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% set active_page = "graphique" %}
+
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+<h1>Graphique</h1>
+
+<p>Veuillez sélectionner un capteur en <a href="{{url_for('page_index')}}">page d'accueil</a> afin d'afficher le graphique</p>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set active_page = "capteur" %}
+
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+{% if capteurs %}
+    {% for capteur in capteurs %}
+        <h1>Données brutes pour le capteur {{capteur.name}} - ID: {{capteur.id}}</h1>
+        <p><a href="{{url_for('page_graphique', idcapteur=capteur.id)}}">Voir le graphique</a></p>
+    {% endfor %}
+{% endif %}
+
+{% if donneestable %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Valeur</th>
+                <th>unité</th>
+                <th>date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donnee in donneestable %}
+            <tr>
+                <td>{{donnee.value}}</td>
+                <td>{{donnee.unite}}</td>
+                <td>{{donnee.date_str()[0:16]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% set active_page = "graphique" %}
+
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+{% if capteurs %}
+    {% for capteur in capteurs %}
+        <h1>Graphique des données pour le capteur {{capteur.name}} - ID: {{capteur.id}}</h1>
+        <p><a href="{{url_for('page_capteur', idcapteur=capteur.id)}}">Voir les données brutes</a></p>
+    {% endfor %}
+{% endif %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<canvas id="myChart" width="400" height="400"></canvas>
+
+
+{% endblock %}
+{% block graph %}
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [
+        {% for donnee in donnees %}
+        '{{ donnee.date_str()[0:16]}}',
+      {% endfor %}
+        ],
+        datasets: [{
+            label: 'données du capteur',
+            data: {{listdata}},
+            backgroundColor: "rgba(44, 130, 201, 1)",
+            borderColor: "rgba(44, 130, 201, 1)",
+            hoverBackgroundColor: "#091c52",
+            borderWidth: 2,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false
+                }
+            }]
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css">
+    {{ bootstrap.load_css() }}
+    <title>{% block title %}{% endblock %} - Mon site BDD et graphique</title>
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{url_for('page_index')}}">Thermos</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if active_page == 'index' else '' }}" href="{{url_for('page_index')}}">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if active_page == 'capteur' else '' }}" href="{{url_for('page_capteur_none')}}">Capteur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ 'active' if active_page == 'graphique' else '' }}" href="{{url_for('page_graphique_none')}}">Graphique</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container site-content my-3">{% block content %}{% endblock %}</div>
+    <div class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            {% block footer %}
+        &copy; Copyright 2021 by Manon Jeuland
+        {% endblock %}
+        </div>
+    </div>
+{{ bootstrap.load_js() }}
+</body>
+{% block graph %}
+{% endblock %}
+</html>
